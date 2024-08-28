@@ -54,13 +54,19 @@ export async function joinUserToSession(input: never){
     return true
 }
 
-const StartSessionInputSchema = yup.object().shape({
+const SesionIdInputSchema = yup.object().shape({
     sessionId: yup.string().required()
 })
 
 export async function startGameSession(input: never){
-    const {sessionId} = await StartSessionInputSchema.validate(input);
+    const {sessionId} = await SesionIdInputSchema.validate(input);
     const updated = await GameSession.updateOne({_id: sessionId, status: "created"}, {status: "started"});
-    return updated.updatedCount > 0
+    return updated.nModified > 0
+}
+
+export async function cancelGameSession(input: never) {
+    const {sessionId} = await SesionIdInputSchema.validate(input);
+    const updated = await GameSession.deleteOne({_id: sessionId, status: "created"});
+    return updated.deletedCount > 0
 }
 

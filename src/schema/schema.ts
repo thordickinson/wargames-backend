@@ -18,9 +18,6 @@ type Query {
   # Generate and fetch the QR code and session details, allowing clients to join the session.
   getSessionQRCode(sessionId: ID!): QRCodeDetails
 
-  # Fetch the list of users that have joined the session, including their roles, names, and teams.
-  getSessionUsers(sessionId: ID!): [SessionUser]
-
   # Fetch the basic information of a planning session, including the session ID, game session ID, start date, and status.
   getPlanningSessionInfo(planningSessionId: ID!): PlanningSessionInfo
 
@@ -41,7 +38,7 @@ type Mutation {
   startGameSession(sessionId: ID!): Boolean!
 
   # Cancel a game session, removing it from the system entirely.
-  cancelGameSession(sessionId: ID!): CancellationResponse
+  cancelGameSession(sessionId: ID!): Boolean!
 
   # Create a new planning session within an existing game session.
   createPlanningSession(gameSessionId: ID!): PlanningSession
@@ -90,13 +87,6 @@ type QRCodeDetails {
   sessionId: ID!
 }
 
-# Represents a user that has joined a session, including their role, name, and team.
-type SessionUser {
-  id: ID!
-  name: String!
-  role: String!
-  team: String!
-}
 
 # Represents the information of a planning session, including its ID, game session ID, start date, status, and duration.
 type PlanningSessionInfo {
@@ -125,11 +115,6 @@ type PlanningSession {
   id: ID!
   status: String!
   startTime: String!
-}
-
-# Represents a response confirming the cancellation of a session.
-type CancellationResponse {
-  success: Boolean!
 }
 
 # Represents a role within a game.

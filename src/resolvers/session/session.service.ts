@@ -42,8 +42,9 @@ const JoinUserToSessionInputSchema = yup.object().shape({
 export async function joinUserToSession(input: never){
     const { sessionId, name, team, role } = await JoinUserToSessionInputSchema.validate(input);
     const session = await GameSession.findById(sessionId);
-    if(session.status !== "created") throw createNotFoundError("Cannot join to an already started session");
     if(!session) throw createNotFoundError("Session not found");
+
+    if(session.startedAt !== null) throw createNotFoundError("Cannot join to an already started session");
     //TODO: Still need to validate team and role, by now just trust that they are valid
     
     //Check if another user with same name is already in the session, then skip
@@ -60,13 +61,21 @@ const SesionIdInputSchema = yup.object().shape({
 
 export async function startGameSession(input: never){
     const {sessionId} = await SesionIdInputSchema.validate(input);
-    const updated = await GameSession.updateOne({_id: sessionId, status: "created"}, {status: "started"});
+    const filter = { _id: sessionId, startedAt: null };
+    const updated = await GameSession.updateOne(filter, {startedAt: new Date()});
     return updated.nModified > 0
 }
 
 export async function cancelGameSession(input: never) {
     const {sessionId} = await SesionIdInputSchema.validate(input);
-    const updated = await GameSession.deleteOne({_id: sessionId, status: "created"});
+    const updated = await GameSession.deleteOne({_id: sessionId, startedAt: null});
     return updated.deletedCount > 0
+}
+
+export async function closeGammingSession(input: never){
+    const {sessionId} = await SesionIdInputSchema.validate(input);
+    const filter = {_id: sessionId, startedAt: {$ne: null}, endedAt: null};
+    const updated = await GameSession.updateOne(filter, {endedAt: new Date()});
+    return updated.nModified > 0
 }
 

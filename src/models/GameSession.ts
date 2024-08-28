@@ -20,11 +20,8 @@ const SessionPlanningSchema = new mongoose.Schema({
 
 const gameSessionSchema = new mongoose.Schema({
   createdAt: { default: Date.now, type: Date },
-  status: {
-    default: "created",
-    type: String,
-    enum: ["created", "started", "ended"],
-  },
+  startedAt: Date,
+  endedAt: Date,
   gameId: { type: mongoose.Schema.Types.ObjectId, ref: "PredefinedGame" },
   players: { type: [SessionPlayerSchema], default: [] },
   planning: { type: SessionPlanningSchema, default: {} }

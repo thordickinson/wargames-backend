@@ -47,7 +47,7 @@ type Mutation {
   stopPlanningSession(gameSessionId: ID!, planningSessionId: ID!, manual: Boolean!): Boolean!
 
   # Close the entire game session, triggering asynchronous processing of results, and redirecting to the results screen.
-  closeGameSession(sessionId: ID!): GameSession
+  closeGameSession(sessionId: ID!): Boolean!
 }
 
 # Types
@@ -70,10 +70,11 @@ type GameDetails {
 type GameSessionDetails {
   id: ID!
   gameId: ID!
-  status: String!
   players: [SessionPlayer]
   planning: PlanningInfo!
   createdAt: DateTime!
+  startedAt: DateTime
+  endedAt: DateTime
 }
 
 type PlanningInfo {
@@ -114,13 +115,6 @@ type PlanningSessionInfo {
 type GameSessionResults {
   status: String!
   data: JSON
-}
-
-# Represents a game session entity.
-type GameSession {
-  id: ID!
-  status: String!
-  startTime: String
 }
 
 # Represents a role within a game.

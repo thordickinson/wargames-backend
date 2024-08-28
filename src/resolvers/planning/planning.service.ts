@@ -1,6 +1,6 @@
 import * as yup from "yup"
 import GameSession from "../../models/GameSession";
-import { createNotFoundError } from "../../utils/exception.utils";
+import { createInputError, createNotFoundError } from "../../utils/exception.utils";
 import { Types } from "mongoose";
 
 
@@ -12,13 +12,17 @@ export async function createPlanningSession(input: never){
     const {gameSessionId} = await CreateSessionInputSchema.validate(input);
     const session = await GameSession.findById(gameSessionId);
     if(!session) throw createNotFoundError("Session not found");
-    if(session.status !== "started") throw createNotFoundError("Cannot create planning session for an ended session");
-    
+    if(session.startedAt == null) 
+        throw createInputError("Cannot create planning session non started game session");
+    if(session.endedAt != null)
+        throw createInputError("Cannot create planning session for an ended game session");
+
     const planningId = new Types.ObjectId();
     const sessions = session.planning.sessions?? []
     
     //find if there is a planning session already running
-    if(sessions.some((s: any) => !s.endedAt)) throw createNotFoundError("Cannot create planning while there is an ongoing session");
+    if(sessions.some((s: any) => !s.endedAt)) 
+        throw createNotFoundError("Cannot create planning while there is an ongoing session");
     
     sessions.push({_id: planningId})
     session.planning.sessions = sessions;

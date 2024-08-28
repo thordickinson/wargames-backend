@@ -126,12 +126,14 @@ type CancellationResponse {
 # Represents a role within a game.
 type Role {
   id: ID!
+  key: String!
   name: String!
 }
 
 # Represents a team within a game.
 type Team {
   id: ID!
+  key: String!
   name: String!
 }
 

@@ -1,8 +1,15 @@
+import {Types} from 'mongoose';
+import {createHash} from 'crypto'
 // This file describes the sample data used in the demo.
 
+function oid(key: string) {
+    const hash = createHash('sha256').update(key).digest('hex');
+    return new Types.ObjectId(hash.slice(0, 24));
+}
 
 const GamesCollection = [
     {   
+        _id: oid("maling"),
         key: "malign", 
         name: "Malign", description: "Un juego a cerca de guerra y comunicaciones", 
         teams: [
@@ -26,7 +33,7 @@ const GamesCollection = [
 
 const GameSessionCollection = [
     {
-        _id: "",
+        _id: oid("session_1"),
         createdAt: "2024-08-28T16:34:21Z",
         status: "created", /* created, started, ended */
         gameId: "", /* ref to Games Collection */

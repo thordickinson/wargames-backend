@@ -1,9 +1,10 @@
-import PredefinedGame from '../models/PredefinedGame';
-import { listPredefinedGames } from './game/game.service';
+import { wrapResolver } from '../utils/grapqhl.utils';
+import { getGameDetails, listPredefinedGames } from './game/game.service';
 
 const resolvers = {
   Query: {
-    listPredefinedGames: listPredefinedGames,
+    listPredefinedGames: wrapResolver(listPredefinedGames),
+    getGameDetails: wrapResolver(getGameDetails),
   },
 };
 

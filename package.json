@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "build": "tsc",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.js",
+    "data": "ts-node-dev src/sample_data.ts"
   },
   "dependencies": {
     "apollo-server": "^3.0.0",

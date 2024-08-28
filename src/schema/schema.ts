@@ -44,7 +44,7 @@ type Mutation {
   createPlanningSession(gameSessionId: ID!): ID!
 
   # Stop the planning session, either automatically by a timer or manually by the user.
-  stopPlanningSession(planningSessionId: ID!, manual: Boolean!): PlanningSession
+  stopPlanningSession(gameSessionId: ID!, planningSessionId: ID!, manual: Boolean!): Boolean!
 
   # Close the entire game session, triggering asynchronous processing of results, and redirecting to the results screen.
   closeGameSession(sessionId: ID!): GameSession
@@ -121,13 +121,6 @@ type GameSession {
   id: ID!
   status: String!
   startTime: String
-}
-
-# Represents a planning session entity.
-type PlanningSession {
-  id: ID!
-  status: String!
-  startTime: String!
 }
 
 # Represents a role within a game.

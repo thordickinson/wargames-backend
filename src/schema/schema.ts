@@ -38,7 +38,7 @@ type Mutation {
   joinToSession(sessionId: String!, name: String!, team: String!, role: String!): Boolean!
 
   # Start the game session, moving it from 'created' to 'started', which stops more users from joining.
-  startGameSession(sessionId: ID!): GameSession
+  startGameSession(sessionId: ID!): Boolean!
 
   # Cancel a game session, removing it from the system entirely.
   cancelGameSession(sessionId: ID!): CancellationResponse
@@ -73,6 +73,7 @@ type GameDetails {
 type GameSessionDetails {
   id: ID!
   gameId: ID!
+  status: String!
   players: [SessionPlayer]
   createdAt: DateTime!
 }

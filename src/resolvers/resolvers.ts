@@ -1,6 +1,6 @@
 import { wrapResolver } from '../utils/grapqhl.utils';
 import { getGameDetails, listPredefinedGames } from './game/game.service';
-import { createGameSession, getGameSessionDetails, joinUserToSession } from './session/session.service';
+import { createGameSession, getGameSessionDetails, joinUserToSession, startGameSession } from './session/session.service';
 
 const resolvers = {
   Query: {
@@ -10,7 +10,8 @@ const resolvers = {
   },
   Mutation: {
     createGameSession: wrapResolver(createGameSession),
-    joinToSession: wrapResolver(joinUserToSession)
+    joinToSession: wrapResolver(joinUserToSession),
+    startGameSession: wrapResolver(startGameSession),
   }
 };
 

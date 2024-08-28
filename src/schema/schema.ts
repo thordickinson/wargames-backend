@@ -34,6 +34,9 @@ type Mutation {
   # Create a new game session using the selected game ID and configuration details.
   createGameSession(gameId: ID!, planningDuration: Int!): ID!
 
+  # Allows a user to join a game session.
+  joinToSession(sessionId: String!, name: String!, team: String!, role: String!): Boolean!
+
   # Start the game session, moving it from 'created' to 'started', which stops more users from joining.
   startGameSession(sessionId: ID!): GameSession
 

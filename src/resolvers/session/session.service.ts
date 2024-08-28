@@ -30,3 +30,22 @@ export async function getGameSessionDetails({sessionId}: {sessionId: string}){
     if(!session) throw createNotFoundError("Session not found");
     return session
 }
+
+
+const JoinUserToSessionInputSchema = yup.object().shape({
+    sessionId: yup.string().required(),
+    name: yup.string().required(),
+    team: yup.string().required(),
+    role: yup.string().required()
+})
+
+export async function joinUserToSession(input: never){
+    const { sessionId, name, team, role } = await JoinUserToSessionInputSchema.validate(input);
+    const session = await GameSession.findById(sessionId);
+    if(!session) throw createNotFoundError("Session not found");
+    //TODO: Still need to validate team and role, by now just trust that they are valid
+    session.players.push({name, team, role});
+    await session.save();
+    return true
+}
+

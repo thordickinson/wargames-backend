@@ -31,7 +31,7 @@ type Query {
 
 type Mutation {
   # Create a new game session using the selected game ID and configuration details.
-  createGameSession(gameId: ID!, planningDuration: Int!): GameSession
+  createGameSession(gameId: ID!, planningDuration: Int!): ID!
 
   # Start the game session, moving it from 'created' to 'started', which stops more users from joining.
   startGameSession(sessionId: ID!): GameSession
@@ -70,9 +70,7 @@ type GameSessionDetails {
   id: ID!
   gameId: ID!
   participants: [Participant]
-  roles: [Role]
-  teams: [Team]
-  startTime: String
+  createdAt: String!
 }
 
 # Represents the details of a QR code used to join a session.

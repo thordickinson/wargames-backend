@@ -1,10 +1,10 @@
-import { Types } from "mongoose";
 import PredefinedGame from "../../models/PredefinedGame";
+import { createNotFoundError } from "../../utils/exception.utils";
 
 export async function getGameDetails({ gameId }: {gameId: string }) {
-  const game = await PredefinedGame.findById(new Types.ObjectId(gameId));
+  const game = await PredefinedGame.findById(gameId);
   if (!game) {
-    throw new Error("Game not found");
+    throw createNotFoundError("Game not found");
   }
   return {
     id: game._id,

@@ -5,7 +5,7 @@ const PlanningSessionSchema = new mongoose.Schema({
   startedAt: { default: Date.now, type: Date },
   endedAt: Date,
   endTrigger: { type: String, enum: ["manual", "auto"] },
-}, { _id: false, versionKey: false });
+}, { versionKey: false });
 
 const SessionPlayerSchema = new mongoose.Schema({
       name: String,

@@ -41,7 +41,7 @@ type Mutation {
   cancelGameSession(sessionId: ID!): Boolean!
 
   # Create a new planning session within an existing game session.
-  createPlanningSession(gameSessionId: ID!): PlanningSession
+  createPlanningSession(gameSessionId: ID!): ID!
 
   # Stop the planning session, either automatically by a timer or manually by the user.
   stopPlanningSession(planningSessionId: ID!, manual: Boolean!): PlanningSession
@@ -72,7 +72,20 @@ type GameSessionDetails {
   gameId: ID!
   status: String!
   players: [SessionPlayer]
+  planning: PlanningInfo!
   createdAt: DateTime!
+}
+
+type PlanningInfo {
+  configuration: JSON
+  sessions: [PlanningSessionInfo1]
+}
+
+type PlanningSessionInfo1 {
+  _id: ID!
+  startedAt: DateTime!
+  endedAt: DateTime
+  endTrigger: String
 }
 
 type SessionPlayer {

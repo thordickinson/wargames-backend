@@ -24,3 +24,9 @@ export async function createGameSession(input: never){
     const created = await GameSession.create(session);
     return created._id
 }
+
+export async function getGameSessionDetails({sessionId}: {sessionId: string}){
+    const session = await GameSession.findById(sessionId);
+    if(!session) throw createNotFoundError("Session not found");
+    return session
+}

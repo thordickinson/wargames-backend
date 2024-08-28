@@ -3,6 +3,7 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
 # JSON scalar type to handle dynamic data structures.
 scalar JSON
+scalar DateTime
 
 type Query {
   # List the names of predefined games to display in the frontend.
@@ -69,8 +70,14 @@ type GameDetails {
 type GameSessionDetails {
   id: ID!
   gameId: ID!
-  participants: [Participant]
-  createdAt: String!
+  players: [SessionPlayer]
+  createdAt: DateTime!
+}
+
+type SessionPlayer {
+  name: String!
+  role: String!
+  team: String!
 }
 
 # Represents the details of a QR code used to join a session.
@@ -135,13 +142,6 @@ type Team {
   name: String!
 }
 
-# Represents a participant in a game session.
-type Participant {
-  id: ID!
-  name: String!
-  role: Role!
-  team: Team!
-}
 `;
 
 export default typeDefs;

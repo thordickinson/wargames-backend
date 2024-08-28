@@ -3,6 +3,13 @@
 #!/bin/bash
 
 CONTAINER_NAME="mongo_dev"
+VOLUME_NAME="mongo_data"
+
+# Check if the volume exists, create if it doesn't
+if [ -z "$(docker volume ls -q -f name=$VOLUME_NAME)" ]; then
+    echo "Creating Docker volume $VOLUME_NAME..."
+    docker volume create $VOLUME_NAME
+fi
 
 # Check if the container is already running
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
@@ -15,6 +22,6 @@ else
     else
         # Run a new MongoDB container
         echo "Starting a new MongoDB container..."
-        docker run --name $CONTAINER_NAME -d -p 27017:27017 -v $(pwd)/data/db:/data/db mongo
+        docker run --name $CONTAINER_NAME -d -p 27017:27017 -v $VOLUME_NAME:/data/db mongo
     fi
 fi

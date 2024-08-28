@@ -59,9 +59,9 @@ const GameSessionCollection = [
                 sessionDuration: "15m",
             },
             sessions: [
-                {_id: oid("planning_1"), startedAt: "2024-08-28T16:34:21Z", endedAt: "2024-08-29T16:49:21Z", endTrigger: "manual", plannedLenght: "15m"},
-                {_id: oid("planning_2"), startedAt: "2024-08-28T16:59:00Z", endedAt: "2024-08-29T17:00:0Z", endTrigger: "automatic", plannedLenght: "15m"},
-                {_id: oid("planning_3"), startedAt: "2024-08-28T17:05:02Z", endedAt: undefined, endTrigger: undefined, plannedLenght: "15m"} /* Ongoing */
+                {_id: oid("planning_1"), startedAt: "2024-08-28T16:34:21Z", endedAt: "2024-08-29T16:49:21Z", endTrigger: "manual"},
+                {_id: oid("planning_2"), startedAt: "2024-08-28T16:59:00Z", endedAt: "2024-08-29T17:00:0Z", endTrigger: "automatic"},
+                {_id: oid("planning_3"), startedAt: "2024-08-28T17:05:02Z", endedAt: undefined, endTrigger: undefined} /* Ongoing */
             ]
         }
     }

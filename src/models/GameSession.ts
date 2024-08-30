@@ -27,6 +27,6 @@ const gameSessionSchema = new mongoose.Schema({
   planning: { type: SessionPlanningSchema, default: {} }
 });
 
-const GameSession = mongoose.model("GameSession", gameSessionSchema);
+const GameSession = mongoose.model("game_session", gameSessionSchema);
 
 export default GameSession;

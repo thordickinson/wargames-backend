@@ -8,6 +8,7 @@ import resolvers from './resolvers/resolvers';
 
 
 const MONGO_URL = process.env.MONGO_URL ?? 'mongodb://localhost:27017/wargames';
+const PORT = process.env.PORT ?? 4001;
 
 const startServer = async () => {
   console.log('Connecting to the database: ' + MONGO_URL);
@@ -19,7 +20,7 @@ const startServer = async () => {
 
     const server = new ApolloServer({ typeDefs, resolvers });
 
-    server.listen().then(({ url }) => {
+    server.listen({ port: PORT }).then(({ url }) => {
       console.log(`🚀 Server ready at ${url}`);
     });
   } catch (error) {

@@ -122,6 +122,7 @@ type Role {
   id: ID!
   key: String!
   name: String!
+  description: String
 }
 
 # Represents a team within a game.
@@ -129,6 +130,8 @@ type Team {
   id: ID!
   key: String!
   name: String!
+  description: String
+  color: String
 }
 
 `;

@@ -44,7 +44,7 @@ export async function joinUserToSession(input: never){
     const session = await GameSession.findById(sessionId);
     if(!session) throw createNotFoundError("Session not found");
 
-    if(session.startedAt !== null) throw createNotFoundError("Cannot join to an already started session");
+    if(session.startedAt != null) throw createNotFoundError("Cannot join to an already started session");
     //TODO: Still need to validate team and role, by now just trust that they are valid
     
     //Check if another user with same name is already in the session, then skip

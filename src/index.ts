@@ -1,11 +1,11 @@
-import { config } from 'dotenv'
+import 'dotenv/config'
 
 import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
 import typeDefs from './schema/schema';
 import resolvers from './resolvers/resolvers';
 
-config();
+
 
 const MONGO_URL = process.env.MONGO_URL ?? 'mongodb://localhost:27017/wargames';
 

@@ -8,6 +8,7 @@ import resolvers from './resolvers/resolvers';
 const MONGO_URL = process.env.MONGO_URL ?? 'mongodb://localhost:27017/wargames';
 
 const startServer = async () => {
+  console.log('Connecting to the database: ' + MONGO_URL);
   try {
     await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,

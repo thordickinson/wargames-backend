@@ -7,7 +7,7 @@ import GameSession from './models/GameSession';
 
 function oid(key: string) {
   const hash = createHash('sha256').update(key).digest('hex');
-  return new mongoose.Types.ObjectId(hash.slice(0, 24));
+  return Types.ObjectId(hash.slice(0, 24));
 }
 
 const GamesCollection = [

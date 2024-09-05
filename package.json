@@ -6,7 +6,8 @@
     "start": "ts-node-dev src/index.ts",
     "build": "tsc",
     "serve": "node dist/index.js",
-    "data": "ts-node-dev src/sample_data.ts"
+    "data": "ts-node-dev src/sample_data.ts",
+    "docker": "docker build -t speech-evaluator/backend:latest ."
   },
   "dependencies": {
     "@apollo/server": "^4.11.0",

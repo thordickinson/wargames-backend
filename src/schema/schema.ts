@@ -1,6 +1,5 @@
-import { gql } from 'apollo-server';
 
-const typeDefs = gql`
+const typeDefs = `#grapqhl
 # JSON scalar type to handle dynamic data structures.
 scalar JSON
 scalar DateTime

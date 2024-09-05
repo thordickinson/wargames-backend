@@ -21,6 +21,5 @@ const predefinedGameSchema = new mongoose.Schema({
   ],                                                                                                                                                                                  
 });                                                                                                                                                                                   
                                                                                                                                                                                       
-const PredefinedGame = mongoose.model('games', predefinedGameSchema);                                                                                                        
-                                                                                                                                                                                      
+const PredefinedGame = mongoose.model('games', predefinedGameSchema);                                                                                                            
 export default PredefinedGame;
